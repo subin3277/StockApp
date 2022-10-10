@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".favoriteFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="투자 5개"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="에어비앤비"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="center_vertical"
+                    android:text="135,34"
+                    android:textSize="20dp"
+                    android:layout_weight="4"/>
+
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
