@@ -36,24 +36,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="#80273238">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/ic_launcher"
-                android:layout_gravity="center"/>
+            android:background="#80273238"
+            android:weightSum="9">
 
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/search_keyword"
+                android:layout_width="0dp"
+                android:layout_weight="7"
                 android:layout_height="wrap_content"
-                android:text="검색할 주식을 입력해주세요"
+                android:text=""
                 android:textSize="25dp"
                 android:padding="10dp"
                 />
 
+            <Button
+                android:id="@+id/search_btn"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:text="검색"/>
+
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/search_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -123,35 +129,35 @@
                     android:layout_marginBottom="10dp"
                     />
                 <TextView
-                    android:id="@+id/seach_rank_1"
+                    android:id="@+id/search_rank_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1. TQQQ"
                     android:textSize="30dp"
                     />
                 <TextView
-                    android:id="@+id/seach_rank_2"
+                    android:id="@+id/search_rank_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2. 삼성전자"
                     android:textSize="30dp"
                     />
                 <TextView
-                    android:id="@+id/seach_rank_3"
+                    android:id="@+id/search_rank_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3. 테슬라"
                     android:textSize="30dp"
                     />
                 <TextView
-                    android:id="@+id/seach_rank_4"
+                    android:id="@+id/search_rank_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4. SOXL"
                     android:textSize="30dp"
                     />
                 <TextView
-                    android:id="@+id/seach_rank_5"
+                    android:id="@+id/search_rank_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5. 애플"
@@ -162,48 +168,10 @@
 
         </LinearLayout>
 
-        <TextView
+        <ListView
+            android:id="@+id/search_result"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="추천 주식"
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:layout_marginLeft="20dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
-                android:layout_weight="2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="에어비앤비"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="25dp"
-                android:layout_margin="10dp"
-                android:layout_weight="4"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:layout_gravity="center_vertical"
-                android:text="135,34"
-                android:textSize="20dp"
-                android:layout_weight="4"/>
-        </LinearLayout>
-
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
