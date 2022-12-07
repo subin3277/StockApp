@@ -12,7 +12,7 @@ import java.util.Map;
 public class RegisterRequest extends StringRequest {
 
     // 서버 URL 설정
-    final static private String URL = "http://13.124.21.50:8080/api/swagger-ui.html/user/join/";
+    final static private String URL = "http://13.124.21.50:8080/api/user/join";
     private Map<String, String> map;
 
     public RegisterRequest(String userID, String userPassword, String userName, String userEmail, Response.Listener<String> listener) {
