@@ -26,6 +26,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,19 +61,12 @@ public class MainActivity extends AppCompatActivity {
                             connection.setDoOutput(true);       //데이터를 쓸 지 설정
                             connection.setDoInput(true);        //데이터를 읽어올지 설정
 
-                            JSONObject jsonObject = new JSONObject();
-
-                            try {
-                                jsonObject.put("id",idtxt);
-                                jsonObject.put("password",pwdtxt);
-
-                            } catch (JSONException e){
-                                e.printStackTrace();
-                            }
-                            Log.e("json","생성한 json"+jsonObject.toString());
+                            Map<String, String> map = new HashMap<>();
+                            map.put("userID", idtxt);
+                            map.put("userPassword", pwdtxt);
 
                             OutputStream outputStream = connection.getOutputStream();
-                            outputStream.write(jsonObject.toString().getBytes());
+                            outputStream.write(map.toString().getBytes());
                             outputStream.flush();
 
                             String response;
