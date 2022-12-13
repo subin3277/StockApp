@@ -1,53 +1,33 @@
 package com.example.stockapp;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.json.JSONObject;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonObjectRequest;
 
-public class LogoutRequest extends StringRequest {
-    Context context;
-    private SharedPreferences pref;
-
-    // 서버 URL 설정
+public class LogoutRequest extends JsonObjectRequest {
     final static private String URL = "http://13.124.21.50:8080/api/user/logout";
-    private Map<String, String> map;
+    private Map mHeaders=new HashMap(1);
 
-    public LogoutRequest(Response.Listener<String> listener) {
-        super(Method.POST, URL, listener, null);
+    public LogoutRequest(JSONObject jsonRequest, Listener listener) {
+        super(Method.POST, URL, jsonRequest, listener, null);
+    }
+
+
+    String cookie = LoginRequest.
+    public void setCookie(String cookie){
+        mHeaders.put("Cookie", cookie);
     }
 
     @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
-        return map;
+    public Map getHeaders() throws AuthFailureError {
+        return mHeaders;
     }
 
-
-
-
-//    private void setSessionIdInSharedPref(String sessionid){
-//        Log.d("hahaha", "시도중");
-//        pref = PreferenceManager.getDefaultSharedPreferences("sessionCookie", Context.MODE_PRIVATE);
-//        Log.d("hahaha", "시도중..");
-//        SharedPreferences.Editor edit = pref.edit();
-//        Log.d("hahaha", "시도중....");
-//        if(pref.getString("sessionid",null) == null){ //처음 로그인하여 세션아이디를 받은 경우
-//            Log.d("LOG","처음 로그인하여 세션 아이디를 pref에 넣었습니다."+sessionid);
-//        }else if(!pref.getString("sessionid",null).equals(sessionid)){ //서버의 세션 아이디 만료 후 갱신된 아이디가 수신된경우
-//            Log.d("LOG","기존의 세션 아이디"+pref.getString("sessionid",null)+"가 만료 되어서 "
-//                    +"서버의 세션 아이디 "+sessionid+" 로 교체 되었습니다.");
-//        }
-//        edit.putString("sessionid", sessionid);
-//
-//        Log.d("hahaha", "시도중 .....................ㅗ");
-//        edit.apply(); //비동기 처리
-//    }
-
 }
+
+

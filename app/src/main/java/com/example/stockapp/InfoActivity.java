@@ -62,7 +62,8 @@ public class InfoActivity extends AppCompatActivity {
                         }
                     }
                 };
-                LogoutRequest logoutRequest = new LogoutRequest(responseListener);
+                JSONObject dummy = new JSONObject();
+                LogoutRequest logoutRequest = new LogoutRequest(dummy, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(InfoActivity.this);
                 queue.add(logoutRequest);
             }
