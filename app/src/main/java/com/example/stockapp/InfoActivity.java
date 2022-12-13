@@ -44,7 +44,7 @@ public class InfoActivity extends AppCompatActivity {
 
 
 
-        // 로그아웃 
+        // 로그아웃
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
