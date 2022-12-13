@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("hahaha", "성공!!!!!");
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, InfoActivity.class);
-//                                intent.putExtra("userID", userID);
+                                intent.putExtra("userID", userID);
 //                                intent.putExtra("userPass", userPass);
                                 startActivity(intent);
                             } else { // 로그인에 실패한 경우
