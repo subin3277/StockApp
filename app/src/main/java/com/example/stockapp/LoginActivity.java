@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -78,8 +79,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences pref = context.getSharedPreferences("sessionCookie",Context.MODE_PRIVATE);
+                                String sessionid = pref.getString("sessionid",null);
+                                Log.d("hahaha", "여기요!!!!!" + sessionid);
+
                                 Intent intent = new Intent(LoginActivity.this, InfoActivity.class);
                                 intent.putExtra("userID", userID);
+                                intent.putExtra("sessionid", sessionid);
 //                                intent.putExtra("userPass", userPass);
                                 startActivity(intent);
                             } else { // 로그인에 실패한 경우

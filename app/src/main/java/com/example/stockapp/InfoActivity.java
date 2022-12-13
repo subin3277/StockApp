@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,9 @@ import org.json.JSONObject;
 
 public class InfoActivity extends AppCompatActivity {
 
-    private TextView tv_id, btn_logout;
+    private TextView tv_id, tv_test;
+    private Button btn_logout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,45 +30,25 @@ public class InfoActivity extends AppCompatActivity {
 
         tv_id = findViewById(R.id.tv_id);
         btn_logout = findViewById(R.id.btn_logout);
+        tv_test = findViewById(R.id.tv_test);
 
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
+        String sessionid = intent.getStringExtra("sessionid");
+        Log.e("hahaha", "@@@@@@@@@" + sessionid);
 
         tv_id.setText(userID);
+        tv_test.setText(sessionid);
 
 
 
 
+        // 로그아웃 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            Log.i("hahaha", response);
-                            JSONObject jsonObject = new JSONObject(response);
-                            String responseWord = jsonObject.getString("response");
-                            if (responseWord.equals("success_logout")) { // 로그아웃에 성공한 경우
-                                Log.d("hahaha", "로그아웃 성공!!!!!");
-                                Toast.makeText(getApplicationContext(), "로그아웃에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(InfoActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                            } else { // 로그인에 실패한 경우
-                                Toast.makeText(getApplicationContext(), "로그아웃에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                JSONObject dummy = new JSONObject();
-                LogoutRequest logoutRequest = new LogoutRequest(dummy, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(InfoActivity.this);
-                queue.add(logoutRequest);
+                
             }
         });
     }

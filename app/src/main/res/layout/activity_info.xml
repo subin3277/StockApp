@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/test_txt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InfoActivity">
@@ -35,4 +36,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="로그아웃" />
+
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tv_id"
+        app:layout_constraintStart_toStartOf="@+id/tv_id"
+        app:layout_constraintTop_toBottomOf="@+id/tv_id" />
 </androidx.constraintlayout.widget.ConstraintLayout>
