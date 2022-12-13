@@ -15,14 +15,19 @@ public class RegisterRequest extends StringRequest {
     final static private String URL = "http://13.124.21.50:8080/api/user/join";
     private Map<String, String> map;
 
-    public RegisterRequest(String userID, String userPassword, String userName, String userEmail, Response.Listener<String> listener) {
+    public RegisterRequest(String userID, String userPass, String userPass2, String userPin, String userName, String userNickname, String userEmail, String userPhone, String userAddress, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-        map.put("userID", userID);
-        map.put("userPassword", userPassword);
-        map.put("userName", userName);
-        map.put("userEmail", userEmail);
+        map.put("id", userID);
+        map.put("password", userPass);
+        map.put("password_confirm", userPass2);
+        map.put("simple_pwd", userPin);
+        map.put("name", userName);
+        map.put("nick_name", userNickname);
+        map.put("email", userEmail);
+        map.put("phone_number", userPhone);
+        map.put("address", userAddress);
     }
 
     @Override
