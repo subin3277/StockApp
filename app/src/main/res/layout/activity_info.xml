@@ -7,45 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".InfoActivity">
 
-    <TextView
-        android:id="@+id/tv_id"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/info_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#273238">
+
+        <TextView
+            android:id="@+id/info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주식 제목"
+            android:textSize="30sp"
+            android:textColor="#ffffff"
+            android:layout_gravity="left"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
+        android:id="@+id/info_news_title"
+        app:layout_constraintTop_toBottomOf="@+id/info_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
-        android:text="Hello World"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그아웃" />
-
+        android:text="최신 뉴스"
+        android:textSize="20dp"/>
+    <ListView
+        android:id="@+id/info_news"
+        app:layout_constraintTop_toBottomOf="@+id/info_news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="wrap_content"
+        android:id="@+id/info_simi_title"
+        app:layout_constraintTop_toBottomOf="@+id/info_news"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/tv_id"
-        app:layout_constraintStart_toStartOf="@+id/tv_id"
-        app:layout_constraintTop_toBottomOf="@+id/tv_id" />
+        android:text="관련 종목"
+        android:textSize="20dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

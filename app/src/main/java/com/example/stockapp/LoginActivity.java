@@ -2,6 +2,7 @@ package com.example.stockapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -84,7 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                                 String sessionid = pref.getString("sessionid",null);
                                 Log.d("hahaha", "여기요!!!!!" + sessionid);
 
-                                Intent intent = new Intent(LoginActivity.this, InfoActivity.class);
+//                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+
                                 intent.putExtra("userID", userID);
                                 intent.putExtra("sessionid", sessionid);
 //                                intent.putExtra("userPass", userPass);

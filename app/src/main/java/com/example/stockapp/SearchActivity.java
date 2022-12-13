@@ -3,6 +3,8 @@ package com.example.stockapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -155,6 +157,16 @@ public class SearchActivity extends AppCompatActivity {
                                         @Override
                                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                             // 항목 클릭시 나올 화면
+                                            Log.e("tag!!!!!!:",adapter.getItem(i)+l);
+
+                                            Intent intent = new Intent(SearchActivity.this, InfoActivity.class);
+
+                                            try {
+                                                intent.putExtra("stock_code", object_rank.getJSONObject(Long.valueOf(l).intValue()).getString("stock_code"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            startActivity(intent);
                                         }
                                     });
                                 }
