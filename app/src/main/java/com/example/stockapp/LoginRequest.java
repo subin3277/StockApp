@@ -13,12 +13,12 @@ public class LoginRequest extends StringRequest {
     final static private String URL = "http://13.124.21.50:8080/api/user/login";
     private Map<String, String> map;
 
-    public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {
+    public LoginRequest(String userID, String userPass, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("id", userID);
-        map.put("password", userPassword);
+        map.put("password", userPass);
     }
 
     @Override

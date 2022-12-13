@@ -20,10 +20,8 @@ public class InfoActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
-        String userPass = intent.getStringExtra("userPass");
+//        String userID = intent.getStringExtra("userID");
 
-        tv_id.setText(userID);
-        tv_pass.setText(userPass);
+//        tv_id.setText(userID);
     }
 }
