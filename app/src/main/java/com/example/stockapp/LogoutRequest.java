@@ -18,7 +18,6 @@ public class LogoutRequest extends JsonObjectRequest {
     }
 
 
-    String cookie = LoginRequest.
     public void setCookie(String cookie){
         mHeaders.put("Cookie", cookie);
     }
