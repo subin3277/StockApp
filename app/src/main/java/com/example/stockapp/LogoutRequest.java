@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -16,7 +17,6 @@ public class LogoutRequest extends JsonObjectRequest {
     public LogoutRequest(JSONObject jsonRequest, Listener listener) {
         super(Method.POST, URL, jsonRequest, listener, null);
     }
-
 
     public void setCookie(String cookie){
         mHeaders.put("Cookie", cookie);

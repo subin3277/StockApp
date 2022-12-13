@@ -45,7 +45,7 @@ public class InfoActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d("hahaha", response);
+                            Log.i("hahaha", response);
                             JSONObject jsonObject = new JSONObject(response);
                             String responseWord = jsonObject.getString("response");
                             if (responseWord.equals("success_logout")) { // 로그아웃에 성공한 경우

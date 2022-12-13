@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText et_id, et_pass, et_pass2, et_pin, et_name, et_nickname, et_email, et_phone, et_address;
-    private Button btn_register;
+    private Button btn_register, btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // 액티비티 시작시 처음으로 실행되는 생명주기
@@ -37,6 +37,16 @@ public class RegisterActivity extends AppCompatActivity {
         et_phone = findViewById(R.id.et_phone);
         et_address = findViewById(R.id.et_address);
         btn_register = findViewById(R.id.btn_register);
+        btn_back = findViewById(R.id.btn_back);
+
+        // 이미 계정이 있어요 버튼을 클릭 시 수행
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 회원가입 버튼 클릭 시 수행
         btn_register.setOnClickListener(new View.OnClickListener() {

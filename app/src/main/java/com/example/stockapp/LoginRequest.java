@@ -44,9 +44,10 @@ public class LoginRequest extends StringRequest {
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
         Map<String, String> responseHeaders = response.headers;
         String cookies = responseHeaders.get("Set-Cookie");
+
         String sessionid = cookies.split(";\\s*")[0];
         Log.e("hahaha", sessionid);
-//        setSessionIdInSharedPref(sessionid);
+        setSessionIdInSharedPref(sessionid);
 
 
 
@@ -55,22 +56,22 @@ public class LoginRequest extends StringRequest {
     }
 
 
-//    private void setSessionIdInSharedPref(String sessionid){
-//        Log.d("hahaha", "시도중");
-//        pref = PreferenceManager.getDefaultSharedPreferences("sessionCookie", Context.MODE_PRIVATE);
-//        Log.d("hahaha", "시도중..");
-//        SharedPreferences.Editor edit = pref.edit();
-//        Log.d("hahaha", "시도중....");
-//        if(pref.getString("sessionid",null) == null){ //처음 로그인하여 세션아이디를 받은 경우
-//            Log.d("LOG","처음 로그인하여 세션 아이디를 pref에 넣었습니다."+sessionid);
-//        }else if(!pref.getString("sessionid",null).equals(sessionid)){ //서버의 세션 아이디 만료 후 갱신된 아이디가 수신된경우
-//            Log.d("LOG","기존의 세션 아이디"+pref.getString("sessionid",null)+"가 만료 되어서 "
-//                    +"서버의 세션 아이디 "+sessionid+" 로 교체 되었습니다.");
-//        }
-//        edit.putString("sessionid", sessionid);
-//
-//        Log.d("hahaha", "시도중 .....................ㅗ");
-//        edit.apply(); //비동기 처리
-//    }
+    private void setSessionIdInSharedPref(String sessionid){
+        context = LoginActivity.context;
+        Log.d("hahaha", "시도중");
+        pref = context.getSharedPreferences("sessionCookie", Context.MODE_PRIVATE);
+        Log.d("hahaha", "시도중..");
+        SharedPreferences.Editor edit = pref.edit();
+        Log.d("hahaha", "시도중....");
+        if(pref.getString("sessionid",null) == null){ //처음 로그인하여 세션아이디를 받은 경우
+            Log.d("hahaha","처음 로그인하여 세션 아이디를 pref에 넣었습니다."+sessionid);
+        }else if(!pref.getString("sessionid",null).equals(sessionid)){ //서버의 세션 아이디 만료 후 갱신된 아이디가 수신된경우
+            Log.d("hahaha","기존의 세션 아이디"+pref.getString("sessionid",null)+"가 만료 되어서 "
+                    +"서버의 세션 아이디 "+sessionid+" 로 교체 되었습니다.");
+        }
+        edit.putString("sessionid", sessionid);
+        Log.d("hahaha", "시도중 .....................ㅗ");
+        edit.apply(); //비동기 처리
+    }
 
 }

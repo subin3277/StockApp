@@ -2,6 +2,7 @@ package com.example.stockapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,15 +28,19 @@ import java.util.List;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
+    public static Context context;
 
     private EditText et_id, et_pass;
     private Button btn_login, btn_register;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        context = getApplicationContext();
 
         et_id = findViewById(R.id.et_id);
         et_pass = findViewById(R.id.et_pass);
