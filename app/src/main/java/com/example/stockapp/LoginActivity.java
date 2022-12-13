@@ -10,12 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.util.List;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -58,10 +67,11 @@ public class LoginActivity extends AppCompatActivity {
                             String responseWord = jsonObject.getString("response");
                             Log.d("hahaha", responseWord);
                             if (responseWord.equals("success_login")) { // 로그인에 성공한 경우
-//                                String userID = jsonObject.getString("userID");
-//                                String userPass = jsonObject.getString("userPassword");
 
-                                Log.d("hahaha", "성공!!!!!");
+                                Log.d("hahaha", "로그인 성공!!!!!");
+
+
+
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, InfoActivity.class);
                                 intent.putExtra("userID", userID);

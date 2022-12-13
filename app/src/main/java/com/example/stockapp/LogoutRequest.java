@@ -1,11 +1,7 @@
 package com.example.stockapp;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -16,20 +12,16 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginRequest extends StringRequest {
+public class LogoutRequest extends StringRequest {
     Context context;
     private SharedPreferences pref;
 
     // 서버 URL 설정
-    final static private String URL = "http://13.124.21.50:8080/api/user/login";
+    final static private String URL = "http://13.124.21.50:8080/api/user/logout";
     private Map<String, String> map;
 
-    public LoginRequest(String userID, String userPass, Response.Listener<String> listener) {
+    public LogoutRequest(Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
-
-        map = new HashMap<>();
-        map.put("id", userID);
-        map.put("password", userPass);
     }
 
     @Override
@@ -38,21 +30,6 @@ public class LoginRequest extends StringRequest {
     }
 
 
-    // 세션 정보 가져오기
-
-    @Override
-    protected Response<String> parseNetworkResponse(NetworkResponse response) {
-        Map<String, String> responseHeaders = response.headers;
-        String cookies = responseHeaders.get("Set-Cookie");
-        String sessionid = cookies.split(";\\s*")[0];
-        Log.e("hahaha", sessionid);
-//        setSessionIdInSharedPref(sessionid);
-
-
-
-
-        return super.parseNetworkResponse(response);
-    }
 
 
 //    private void setSessionIdInSharedPref(String sessionid){
