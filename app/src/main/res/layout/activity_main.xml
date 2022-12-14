@@ -35,23 +35,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-<!--        임시-->
-        <EditText
-            android:id="@+id/login_tmp_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/login_tmp_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/login_tmp_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

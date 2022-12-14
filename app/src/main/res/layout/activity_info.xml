@@ -22,7 +22,6 @@
             android:textSize="30sp"
             android:textColor="#ffffff"
             android:layout_gravity="left"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             />
 
     </androidx.appcompat.widget.Toolbar>
