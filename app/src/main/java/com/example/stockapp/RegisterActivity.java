@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_back = findViewById(R.id.btn_back);
 
         // 이미 계정이 있어요 버튼을 클릭 시 수행
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

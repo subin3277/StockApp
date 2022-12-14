@@ -85,8 +85,8 @@ public class LoginActivity extends AppCompatActivity {
                                 String sessionid = pref.getString("sessionid",null);
                                 Log.d("hahaha", "여기요!!!!!" + sessionid);
 
-//                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
 
                                 intent.putExtra("userID", userID);
                                 intent.putExtra("sessionid", sessionid);
