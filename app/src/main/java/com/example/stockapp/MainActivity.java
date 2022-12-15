@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 FragmentWishlist fragmentWishlist = new FragmentWishlist();
                 transaction.replace(R.id.frame, fragmentWishlist);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 FragmentHolding fragmentHolding = new FragmentHolding();
                 transaction.replace(R.id.frame, fragmentHolding);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
