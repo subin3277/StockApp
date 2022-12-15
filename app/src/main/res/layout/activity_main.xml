@@ -106,6 +106,12 @@
                 android:text="보유 주식"
                 android:textSize="20dp"/>
         </LinearLayout>
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
 
         <View
             android:layout_width="match_parent"
