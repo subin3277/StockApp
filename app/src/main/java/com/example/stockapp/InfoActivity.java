@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -93,11 +94,38 @@ public class InfoActivity extends AppCompatActivity {
                     }
                     InfoNewsAdapter adapter = new InfoNewsAdapter(InfoActivity.this, 0, items);
 
+                    //관련 종목 가져오기
+                    ListView similarlistview = findViewById(R.id.info_simi);
+
+                    url = new URL("http://13.124.21.50:8080/api/stock/relations/"+stock_code);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET"); //전송방식
+                    connection.setDoOutput(false);       //데이터를 쓸 지 설정
+                    connection.setDoInput(true);        //데이터를 읽어올지 설정
+
+                    is = connection.getInputStream();
+                    sb = new StringBuilder();
+                    br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                    while ((result = br.readLine()) != null) {
+                        sb.append(result).append("\n");
+                    }
+
+                    contents = new JSONObject(sb.toString());
+                    JSONArray similarlist = new JSONArray(contents.getString("contents"));
+
+                    String[] reslist = new String[similarlist.length()];
+                    for (int i = 0; i <similarlist.length();i++){
+                        reslist[i] = similarlist.getJSONObject(i).getString("name");
+                    }
+
+                    ArrayAdapter<String> adapter_similar = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, reslist);
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             info_title.setText(company_title);
                             newslistview.setAdapter(adapter);
+                            similarlistview.setAdapter(adapter_similar);
                         }
                     });
                 } catch (IOException | JSONException e) {

@@ -127,41 +127,10 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     />
-                <TextView
-                    android:id="@+id/search_rank_1"
+                <ListView
+                    android:id="@+id/search_poplist"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1. TQQQ"
-                    android:textSize="30dp"
-                    />
-                <TextView
-                    android:id="@+id/search_rank_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2. 삼성전자"
-                    android:textSize="30dp"
-                    />
-                <TextView
-                    android:id="@+id/search_rank_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="3. 테슬라"
-                    android:textSize="30dp"
-                    />
-                <TextView
-                    android:id="@+id/search_rank_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="4. SOXL"
-                    android:textSize="30dp"
-                    />
-                <TextView
-                    android:id="@+id/search_rank_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="5. 애플"
-                    android:textSize="30dp"
-                    />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
