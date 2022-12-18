@@ -34,6 +34,7 @@ import java.util.List;
 public class InfoActivity extends AppCompatActivity {
 
     private TextView info_title;
+    private TextView info_realtime_now, info_realtime_rate, info_realtime_diff;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,6 +46,9 @@ public class InfoActivity extends AppCompatActivity {
         String stock_code = intent.getStringExtra("stock_code");
 
         info_title = findViewById(R.id.info_title);
+        info_realtime_now = findViewById(R.id.info_realtime_now);
+        info_realtime_diff = findViewById(R.id.info_realtime_diff);
+        info_realtime_rate = findViewById(R.id.info_realtime_rate);
 
         new Thread() {
             @Override
@@ -120,12 +124,47 @@ public class InfoActivity extends AppCompatActivity {
 
                     ArrayAdapter<String> adapter_similar = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, reslist);
 
+                    //실시간 주가 가져오기
+                    url = new URL("http://13.124.21.50:8080/api/stock/realtime/"+stock_code);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET"); //전송방식
+                    connection.setDoOutput(false);       //데이터를 쓸 지 설정
+                    connection.setDoInput(true);        //데이터를 읽어올지 설정
+
+                    is = connection.getInputStream();
+                    sb = new StringBuilder();
+                    br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                    while ((result = br.readLine()) != null) {
+                        sb.append(result).append("\n");
+                    }
+
+                    contents = new JSONObject(sb.toString());
+                    JSONObject realtime = new JSONObject(contents.getString("contents"));
+
+                    Integer realtime_now = realtime.getInt("now");
+                    Double realtime_rate = realtime.getDouble("rate");
+                    Double realtime_diff = realtime.getDouble("diff");
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             info_title.setText(company_title);
                             newslistview.setAdapter(adapter);
                             similarlistview.setAdapter(adapter_similar);
+
+                            info_realtime_now.setText(realtime_now + "원");
+
+                            if (realtime_diff < 0){
+                                //파랑
+                                info_realtime_diff.setTextColor(0xAA0054FF);
+                                info_realtime_rate.setTextColor(0xAA0054FF);
+                            } else {
+                                //빨강
+                                info_realtime_diff.setTextColor(0xAAFF0000);
+                                info_realtime_rate.setTextColor(0xAAFF0000);
+                            }
+                            info_realtime_diff.setText(realtime_diff.toString());
+                            info_realtime_rate.setText(realtime_rate + "%");
                         }
                     });
                 } catch (IOException | JSONException e) {
