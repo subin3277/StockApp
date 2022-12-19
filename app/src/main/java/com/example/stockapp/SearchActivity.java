@@ -70,17 +70,17 @@ public class SearchActivity extends AppCompatActivity {
                     }
 
                     JSONObject contents = new JSONObject(sb.toString());
-
                     JSONArray object_rank = new JSONArray(contents.getString("contents"));
 
                     String[] popularlist = new String[5];
 
                     for(int i=1; i <= 5; i++){
-                        JSONObject array_rank = object_rank.getJSONObject(i);
+                        JSONObject array_rank = object_rank.getJSONObject(i-1);
                         String company_name = array_rank.getString("company_name");
-                        popularlist[i] = i + ". " +company_name;
+                        popularlist[i-1] = i + ". " +company_name;
                     }
 
+                    
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

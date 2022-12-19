@@ -31,23 +31,37 @@
         app:layout_constraintTop_toBottomOf="@+id/info_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="2">
         <TextView
             android:id="@+id/info_realtime_now"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="00000원"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="end|fill_vertical"
+            android:paddingEnd="10dp"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="10dp">
             <TextView
                 android:id="@+id/info_realtime_diff"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="dddd"/>
             <TextView
                 android:id="@+id/info_realtime_rate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="0.00%"/>
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -55,8 +69,11 @@
         app:layout_constraintTop_toBottomOf="@+id/info_realtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
         android:text="최신 뉴스"
-        android:textSize="20dp"/>
+        android:textSize="20sp"
+        android:textStyle="bold"/>
     <ListView
         android:id="@+id/info_news"
         app:layout_constraintTop_toBottomOf="@+id/info_news_title"
@@ -68,7 +85,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="관련 종목"
-        android:textSize="20dp"/>
+        android:layout_marginStart="5dp"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
     <ListView
         android:id="@+id/info_simi"
         android:layout_width="match_parent"
