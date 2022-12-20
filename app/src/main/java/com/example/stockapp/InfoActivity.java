@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -165,6 +166,21 @@ public class InfoActivity extends AppCompatActivity {
                             }
                             info_realtime_diff.setText(realtime_diff.toString());
                             info_realtime_rate.setText(realtime_rate + "%");
+                        }
+                    });
+
+                    newslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            try {
+                                String newsurl = newslist.getJSONObject(Long.valueOf(l).intValue()).getString("url");
+
+                                Intent newsintent = new Intent(Intent.ACTION_VIEW, Uri.parse(newsurl));
+                                startActivity(newsintent);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 } catch (IOException | JSONException e) {

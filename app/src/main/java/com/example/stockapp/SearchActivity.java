@@ -55,6 +55,7 @@ public class SearchActivity extends AppCompatActivity {
             public void run() {
                 try {
 
+                    // 인기 검색 리스트 가져오기
                     URL url = new URL("http://13.124.21.50:8080/api/search/view-cnt-ranking");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET"); //전송방식
@@ -73,11 +74,13 @@ public class SearchActivity extends AppCompatActivity {
                     JSONArray object_rank = new JSONArray(contents.getString("contents"));
 
                     String[] popularlist = new String[5];
+                    String[] popularidlist = new String[5];
 
                     for(int i=1; i <= 5; i++){
                         JSONObject array_rank = object_rank.getJSONObject(i-1);
                         String company_name = array_rank.getString("company_name");
                         popularlist[i-1] = i + ". " +company_name;
+                        popularidlist[i-1] = array_rank.getString("stock_code");
                     }
 
 //                    url = new URL("http://13.124.21.50:8080/api/search/view-cnt-ranking");
@@ -110,6 +113,15 @@ public class SearchActivity extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, popularlist);
                             poplistview.setAdapter(adapter);
                             search_record.setAdapter(adapter); // 변경해야함. 임시
+
+                            poplistview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    Intent intent = new Intent(SearchActivity.this, InfoActivity.class);
+                                    intent.putExtra("stock_code", popularidlist[(Long.valueOf(l).intValue())]);
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     });
 
