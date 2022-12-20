@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,10 +28,16 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
 
 
     Button btn_wishlist, btn_holding;
+    public static JSONArray object_wishlist;
+    public static JSONArray object_holding;
+
+
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -43,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         btn_holding = (Button) findViewById(R.id.btn_holding);
         Intent intent = getIntent();
         String sessionid = intent.getStringExtra("sessionid");
+
+
 
 
 
@@ -69,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject contents = new JSONObject(sb.toString());
 
-                    JSONArray object_wishlist = new JSONArray(contents.getString("contents"));
+                    object_wishlist = new JSONArray(contents.getString("contents"));
                     Log.d("hahaha", "관심주식목록!!!!!" + object_wishlist);
 
                 } catch (IOException | JSONException e) {
@@ -102,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject contents = new JSONObject(sb.toString());
 
-                    JSONArray object_holding = new JSONArray(contents.getString("contents"));
+                    object_holding = new JSONArray(contents.getString("contents"));
                     Log.d("hahaha", "보유주식목록!!!!!" + object_holding);
 
                 } catch (IOException | JSONException e) {
@@ -118,9 +128,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Bundle bundle = new Bundle(); // 번들을 통해 값 전달
+                Gson gson = new Gson();
+                String obj_wishlist = gson.toJson(object_wishlist);
+                bundle.putString("obj_wishlist", obj_wishlist);//번들에 넘길 값 저장
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 FragmentWishlist fragmentWishlist = new FragmentWishlist();
+                fragmentWishlist.setArguments(bundle);
                 transaction.replace(R.id.frame, fragmentWishlist);
                 transaction.commit();
 
@@ -132,8 +147,15 @@ public class MainActivity extends AppCompatActivity {
         btn_holding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Bundle bundle = new Bundle(); // 번들을 통해 값 전달
+                Gson gson = new Gson();
+                String obj_holding = gson.toJson(object_holding);
+                bundle.putString("obj_holding", obj_holding);//번들에 넘길 값 저장
+
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 FragmentHolding fragmentHolding = new FragmentHolding();
+                fragmentHolding.setArguments(bundle);
                 transaction.replace(R.id.frame, fragmentHolding);
                 transaction.commit();
             }
