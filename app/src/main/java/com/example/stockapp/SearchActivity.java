@@ -32,10 +32,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    TextView rank1, rank2, rank3, rank4, rank5;
     ListView search_result;
     Button search_button;
     EditText search_keyword;
@@ -47,11 +47,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        rank1 = findViewById(R.id.search_rank_1);
-        rank2 = findViewById(R.id.search_rank_2);
-        rank3 = findViewById(R.id.search_rank_3);
-        rank4 = findViewById(R.id.search_rank_4);
-        rank5 = findViewById(R.id.search_rank_5);
+        ListView poplistview = findViewById(R.id.search_poplist);
+        ListView search_record = findViewById(R.id.search_record);
 
         new Thread() {
             @Override
@@ -74,33 +71,48 @@ public class SearchActivity extends AppCompatActivity {
                     }
 
                     JSONObject contents = new JSONObject(sb.toString());
-
                     JSONArray object_rank = new JSONArray(contents.getString("contents"));
-                    JSONObject array_rank = object_rank.getJSONObject(0);
 
-                    String company_name1 = array_rank.getString("company_name");
-                    rank1.setText("1. " + company_name1);
-                    rank1.setTextSize(16);
+                    String[] popularlist = new String[5];
 
-                    array_rank = object_rank.getJSONObject(1);
-                    String company_name2 = array_rank.getString("company_name");
-                    rank2.setText("2. " + company_name2);
-                    rank2.setTextSize(16);
+                    for(int i=1; i <= 5; i++){
+                        JSONObject array_rank = object_rank.getJSONObject(i-1);
+                        String company_name = array_rank.getString("company_name");
+                        popularlist[i-1] = i + ". " +company_name;
+                    }
 
-                    array_rank = object_rank.getJSONObject(2);
-                    String company_name3 = array_rank.getString("company_name");
-                    rank3.setText("3. " + company_name3);
-                    rank3.setTextSize(16);
+//                    url = new URL("http://13.124.21.50:8080/api/search/view-cnt-ranking");
+//                    connection = (HttpURLConnection) url.openConnection();
+//                    connection.setRequestMethod("GET"); //전송방식
+//                    connection.setDoOutput(false);       //데이터를 쓸 지 설정
+//                    connection.setDoInput(true);        //데이터를 읽어올지 설정
+//
+//                    is = connection.getInputStream();
+//                    sb = new StringBuilder();
+//                    br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+//                    while ((result = br.readLine()) != null) {
+//                        sb.append(result).append("\n");
+//                    }
+//
+//                    contents = new JSONObject(sb.toString());
+//                    JSONArray object_search = new JSONArray(contents.getString("contents"));
+//
+//                    String[] popularlist = new String[5];
+//
+//                    for(int i=1; i <= 5; i++){
+//                        JSONObject array_rank = object_rank.getJSONObject(i-1);
+//                        String company_name = array_rank.getString("company_name");
+//                        popularlist[i-1] = i + ". " +company_name;
+//                    }
 
-                    array_rank = object_rank.getJSONObject(3);
-                    String company_name4 = array_rank.getString("company_name");
-                    rank4.setText("4. " + company_name4);
-                    rank4.setTextSize(16);
-
-                    array_rank = object_rank.getJSONObject(4);
-                    String company_name5 = array_rank.getString("company_name");
-                    rank5.setText("5. " + company_name5);
-                    rank5.setTextSize(16);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, popularlist);
+                            poplistview.setAdapter(adapter);
+                            search_record.setAdapter(adapter); // 변경해야함. 임시
+                        }
+                    });
 
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
@@ -149,6 +161,7 @@ public class SearchActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+
                                     linear = findViewById(R.id.search_linear);
                                     linear.setVisibility(View.GONE);
                                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, search_res);
