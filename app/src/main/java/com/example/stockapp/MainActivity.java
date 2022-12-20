@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+//        관심주식목록 가져오기
         new Thread() {
             @Override
             public void run() {
@@ -75,6 +75,39 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                     Log.d("hahaha", "관심주식목록에러" + e);
+                }
+            }
+        }.start();
+
+        //        보유주식목록 가져오기
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    String sorting_method = "all";
+                    URL url = new URL("http://13.124.21.50:8080/api/user/stock/holding?sorting_method="+sorting_method);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestProperty("Cookie", sessionid);
+                    connection.setRequestMethod("GET"); //전송방식
+                    connection.setDoOutput(false);       //데이터를 쓸 지 설정
+                    connection.setDoInput(true);        //데이터를 읽어올지 설정
+
+                    InputStream is = connection.getInputStream();
+                    StringBuilder sb = new StringBuilder();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+                    String result;
+                    while ((result = br.readLine()) != null) {
+                        sb.append(result).append("\n");
+                    }
+
+                    JSONObject contents = new JSONObject(sb.toString());
+
+                    JSONArray object_holding = new JSONArray(contents.getString("contents"));
+                    Log.d("hahaha", "보유주식목록!!!!!" + object_holding);
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                    Log.d("hahaha", "보유주식목록에러" + e);
                 }
             }
         }.start();
