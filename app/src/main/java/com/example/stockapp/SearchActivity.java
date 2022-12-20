@@ -58,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
                     // 인기 검색 리스트 가져오기
                     URL url = new URL("http://13.124.21.50:8080/api/search/view-cnt-ranking");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
                     connection.setRequestMethod("GET"); //전송방식
                     connection.setDoOutput(false);       //데이터를 쓸 지 설정
                     connection.setDoInput(true);        //데이터를 읽어올지 설정
