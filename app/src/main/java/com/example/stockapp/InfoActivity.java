@@ -55,7 +55,7 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-
+                    //회사 이름 가져오기
                     URL url = new URL("http://13.124.21.50:8080/api/stock/info/"+stock_code);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET"); //전송방식
@@ -145,6 +145,24 @@ public class InfoActivity extends AppCompatActivity {
                     Integer realtime_now = realtime.getInt("now");
                     Double realtime_rate = realtime.getDouble("rate");
                     Double realtime_diff = realtime.getDouble("diff");
+
+                    //조회수 증가시키기
+                    url = new URL("http://13.124.21.50:8080/api/stock/vcnt-int/"+stock_code);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST"); //전송방식
+                    connection.setDoOutput(true);       //데이터를 쓸 지 설정
+                    connection.setDoInput(true);        //데이터를 읽어올지 설정
+
+                    is = connection.getInputStream();
+                    sb = new StringBuilder();
+                    br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                    while ((result = br.readLine()) != null) {
+                        sb.append(result).append("\n");
+                    }
+
+                    contents = new JSONObject(sb.toString());
+                    JSONObject vcnt_intres = new JSONObject(contents.getString("contents"));
+                    // 이후 응답에 대해서 수정해야함
 
                     runOnUiThread(new Runnable() {
                         @Override
